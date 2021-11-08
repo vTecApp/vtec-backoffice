@@ -7,6 +7,11 @@
 	<ItemGroup>
 		<PackageReference Include="DevExtreme.AspNet.Data" Version="2.8.2" />
 		<PackageReference Include="DevExtreme.AspNet.Core" Version="21.2.3" />
-		<PackageReference Include="VerticalTec.Core" Version="1.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Reference Include="VerticalTec.Core">
+	    <HintPath>..\..\dlls\VerticalTec.Core.dll</HintPath>
+	  </Reference>
 	</ItemGroup>
 </Project>
