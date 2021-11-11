@@ -7,11 +7,24 @@
 	<ItemGroup>
 		<PackageReference Include="DevExtreme.AspNet.Data" Version="2.8.2" />
 		<PackageReference Include="DevExtreme.AspNet.Core" Version="21.2.3" />
+		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+		<PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <Reference Include="VerticalTec.Core">
 	    <HintPath>..\..\dlls\VerticalTec.Core.dll</HintPath>
 	  </Reference>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Controllers\" />
+	  <Folder Include="Data\" />
+	  <Folder Include="Services\" />
+	  <Folder Include="wwwroot\images\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\VerticalTec.Shared\VerticalTec.Shared.csproj" />
 	</ItemGroup>
 </Project>
