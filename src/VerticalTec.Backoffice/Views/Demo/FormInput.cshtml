@@ -1,0 +1,17 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@(Html.DevExtreme().Form()
+    .ColCount(2)
+    .LabelLocation(FormLabelLocation.Top)
+    .Items(item =>
+    {
+        item.AddSimple().Label(l => l.Text("Select shop")).Editor(e => e.SelectBox()
+                .DataSource(new[] {
+                    "Shop1",
+                    "Shop2",
+                    "Shop3",
+                    "Shop4",
+                }));
+        item.AddSimple().Label(l => l.Text("text")).Editor(e => e.TextBox().Placeholder("text"));
+        item.AddSimple().Label(l => l.Text("text2")).Editor(e => e.TextBox().Placeholder("text"));
+    }))

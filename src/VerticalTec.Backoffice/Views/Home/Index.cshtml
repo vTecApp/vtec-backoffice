@@ -1,45 +1,27 @@
-﻿<!--begin::Toolbar-->
-<div class="toolbar" id="kt_toolbar">
-    <!--begin::Container-->
-    <div id="kt_toolbar_container" class="container-fluid d-flex flex-stack">
-        <!--begin::Page title-->
-        <div data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}" class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
-            <!--begin::Title-->
-            <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">
-                Page title
-                <!--begin::Separator-->
-                <span class="h-20px border-gray-200 border-start ms-3 mx-2"></span>
-                <!--end::Separator-->
-                <!--begin::Description-->
-                <small class="text-muted fs-7 fw-bold my-1 ms-1">Description</small>
-                <!--end::Description-->
-            </h1>
-            <!--end::Title-->
-        </div>
-        <!--end::Page title-->
-        <!--begin::Actions-->
-        <div class="d-flex align-items-center py-1">
-            <!--begin::Wrapper-->
-            <div class="me-4">
-                <a href="#" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button">Page action menu 1</a>
-            </div>
-            <!--end::Wrapper-->
-            <!--begin::Button-->
-            <a href="#" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button">Page action menu 2</a>
-            <!--end::Button-->
-        </div>
-        <!--end::Actions-->
-    </div>
-    <!--end::Container-->
-</div>
-<!--end::Toolbar-->
-<!--begin::Post-->
-<div class="post d-flex flex-column-fluid" id="kt_post">
-    <!--begin::Container-->
-    <div id="kt_content_container" class="container">
-        <!--begin::Row-->
-        <!--end::Row-->
-    </div>
-    <!--end::Container-->
-</div>
-<!--end::Post-->
+@using VerticalTec_Backoffice.Models
+
+@(Html.DevExtreme().DataGrid<SampleOrder>()
+    .ShowBorders(true)
+    .DataSource(d => d.Mvc().Controller("SampleData").LoadAction("Get").Key("OrderID"))
+    .Columns(columns => {
+        columns.AddFor(m => m.OrderID);
+        columns.AddFor(m => m.OrderDate).Format("dd/MMMM/yyyy");
+        columns.AddFor(m => m.CustomerName);
+        columns.AddFor(m => m.ShipCountry);
+        columns.AddFor(m => m.ShipCity);
+    })
+    .Paging(p => p.PageSize(10))
+    .FilterRow(f => f.Visible(true))
+    .HeaderFilter(f => f.Visible(true))
+    .GroupPanel(p => p.Visible(true))
+    .Grouping(g => g.AutoExpandAll(false))
+    .RemoteOperations(true)
+    .Summary(s => s
+        .TotalItems(totalItems => {
+            totalItems.AddFor(m => m.ShipCity).SummaryType(SummaryType.Count);
+        })
+        .GroupItems(groupItems => {
+            groupItems.Add().SummaryType(SummaryType.Count);
+        })
+    )
+)

@@ -1,43 +1,100 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+body, html {
+    margin: 0;
+    min-height: 100%;
+    height: 100%;
 }
 
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+#app-side-nav-outer-toolbar {
+    flex-direction: column;
+    display: flex;
+    height: 100%;
+    width: 100%;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+.layout-header {
+    flex: 0 0 auto;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    position: relative;
+    z-index: 1501;
 }
 
-/* styles for validation helpers */
-.field-validation-error {
-    color: #b94a48;
+.dx-toolbar{
+    padding:10px;
 }
 
-.field-validation-valid {
-    display: none;
+.dx-toolbar .dx-toolbar-item.menu-button {
+    width: 60px;
+    text-align: center;
 }
 
-input.input-validation-error {
-    border: 1px solid #b94a48;
+.with-footer > div > div > .dx-scrollable-content {
+    height: 100%;
 }
 
-input[type="checkbox"].input-validation-error {
-    border: 0 none;
+.with-footer > div > div > .dx-scrollable-content > .dx-scrollview-content {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
 }
 
-.validation-summary-errors {
-    color: #b94a48;
+.layout-body {
+    flex: 1;
+    height: 100%;
+    min-height: 0;
 }
 
-.validation-summary-valid {
-    display: none;
+.layout-body .menu-container {
+    height: 100%;
+    width: 250px;
 }
 
+.content{
+    margin: 20px;
+}
+
+.layout-body .content {
+    flex-grow: 1;
+    height: 100%;
+    line-height: 1.5;
+}
+
+.layout-body .content h2 {
+    font-size: 30px;
+    font-weight: 300;
+    letter-spacing: -.5px;
+}
+
+.layout-body .content-block {
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 20px;
+}
+
+.layout-body .content-footer {
+    display: block;
+    color: rgba(0,0,0,.609);
+    border-top: 1px solid rgba(0,0,0,.1);
+    padding-top: 20px;
+    padding-bottom: 24px;
+}
+
+.layout-body .responsive-paddings {
+    padding: 20px;
+}
+
+.layout-body-hidden {
+    visibility: hidden;
+}
+
+@media screen and (min-width: 600px) {
+    .layout-body .content-block {
+        margin-left: 40px;
+        margin-right: 40px;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .layout-body .responsive-paddings {
+        padding: 40px;
+    }
+}
