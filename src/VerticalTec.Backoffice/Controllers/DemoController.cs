@@ -12,7 +12,7 @@ namespace VerticalTec.Backoffice.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction("FormInput");
         }
 
         public IActionResult FormInput()
@@ -20,7 +20,12 @@ namespace VerticalTec.Backoffice.Controllers
             return View();
         }
 
-        public IActionResult Pivot()
+        public IActionResult PivotGrid()
+        {
+            return View();
+        }
+
+        public IActionResult DataGrid()
         {
             return View();
         }

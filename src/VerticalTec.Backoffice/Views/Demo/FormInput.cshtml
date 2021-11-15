@@ -1,17 +1,31 @@
 ﻿@using Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer Localizer
+
+<h1>@Localizer["Form"]</h1>
 @(Html.DevExtreme().Form()
     .ColCount(2)
-    .LabelLocation(FormLabelLocation.Top)
+    .LabelLocation(FormLabelLocation.Left)
     .Items(item =>
     {
-        item.AddSimple().Label(l => l.Text("Select shop")).Editor(e => e.SelectBox()
-                .DataSource(new[] {
-                    "Shop1",
-                    "Shop2",
-                    "Shop3",
-                    "Shop4",
-                }));
-        item.AddSimple().Label(l => l.Text("text")).Editor(e => e.TextBox().Placeholder("text"));
-        item.AddSimple().Label(l => l.Text("text2")).Editor(e => e.TextBox().Placeholder("text"));
-    }))
+        item.AddGroup()
+        .ColCount(2)
+        .Items(item =>
+        {
+            item.AddSimple().Label(l => l.Text(Localizer["SelectBox"].Value))
+                .Editor(e => e.SelectBox()
+                .Value(new JS("null"))
+                    .DataSource(new[] {
+                    "Item1",
+                    "Item2",
+                    "Item3"
+                    }))
+                .ValidationRules(r => r.AddRequired().Message(Localizer["Required Field"].Value));
+                item.AddSimple().Label(l => l.Text(Localizer["TextBox"].Value)).Editor(e => e.TextBox());
+                item.AddSimple().Label(l => l.Text(Localizer["DateBox"].Value)).Editor(e => e.DateBox());
+        });
+        item.AddButton();
+    }).OnContentReady(@<text>
+        function(e) {
+                e.component.validate();
+            }
+    </text>))

@@ -11,7 +11,8 @@ namespace VerticalTec_Backoffice.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            //return View();
+            return Redirect("Demo");
         }
 
         public IActionResult SetLanguage(string culture, string returnUrl)

@@ -117,16 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Form" xml:space="preserve">
-    <value>ฟอร์ม</value>
-  </data>
-  <data name="Required Field" xml:space="preserve">
-    <value>กรุณากรอกข้อมูล</value>
-  </data>
-  <data name="SelectBox" xml:space="preserve">
-    <value>Select box</value>
-  </data>
-  <data name="TextBox" xml:space="preserve">
-    <value>Text box</value>
+  <data name="Data Grid" xml:space="preserve">
+    <value>แสดงตารางข้อมูล</value>
   </data>
 </root>

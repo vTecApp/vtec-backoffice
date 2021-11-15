@@ -1,5 +1,8 @@
 ﻿@using VerticalTec_Backoffice.Models
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 
+<h1>@Localizer["Data Grid"]</h1>
 @(Html.DevExtreme().DataGrid<SampleOrder>()
     .ShowBorders(true)
     .DataSource(d => d.Mvc().Controller("SampleData").LoadAction("Get").Key("OrderID"))

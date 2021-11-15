@@ -44,6 +44,7 @@ body, html {
 }
 
 .layout-body .menu-container {
+    padding-top:1rem;
     height: 100%;
     width: 250px;
 }
@@ -72,7 +73,6 @@ body, html {
 
 .layout-body .content-footer {
     display: block;
-    color: rgba(0,0,0,.609);
     border-top: 1px solid rgba(0,0,0,.1);
     padding-top: 20px;
     padding-bottom: 24px;

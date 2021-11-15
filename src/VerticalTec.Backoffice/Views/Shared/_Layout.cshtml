@@ -19,6 +19,9 @@
 <body>
     <div id="app-side-nav-outer-toolbar">
         <div class="layout-header">
+            @{ 
+                var requestCulture = Context.Features.Get<Microsoft.AspNetCore.Localization.IRequestCultureFeature>();
+            }
             @(Html.DevExtreme().Toolbar()
                 .Items(items => {
                     items.Add()
@@ -36,8 +39,9 @@
                     items.Add()
                         .Widget(w => w.SelectBox()
                         .Width(140)
+                        .Value(requestCulture.RequestCulture.UICulture.Name)
                         .DataSource(new[] {
-                            new { culture = "th-TH", text = "TH" },
+                            new { culture = "th", text = "TH" },
                             new { culture= "en-US", text = "EN" },
                         })
                         .OnValueChanged("VerticalTec_Backoffice.selectBoxLanguageChanged")
@@ -55,7 +59,7 @@
                 .Opened(new JS("VerticalTec_Backoffice.restoreDrawerOpened()"))
                 .Content(@<text>
                     <div id="layout-drawer-scrollview" class="with-footer">
-                        <div class="content">
+                        <div class="content pl-lg-5 pl-lg-5">
                             @RenderBody()
                         </div>
                         <div class="content-block">
@@ -74,7 +78,7 @@
 
     @using (Html.DevExtreme().NamedTemplate("navigation-menu"))
     {
-        <div class="menu-container dx-swatch-additional">
+        <div class="menu-container">
 
             @functions{
                 string GetUrl(string action, string controller = "") => Url.Action(action, controller);
@@ -88,11 +92,15 @@
                     items.Add()
                     .Text("Form input")
                     .Option("path", GetUrl("FormInput", "Demo"))
-                    .Selected(IsCurrentUrl("FormInput", "Demo"));
+                    .Selected(IsCurrentUrl("FormInput", "Demo")); 
                     items.Add()
-                    .Text("Pivot")
-                    .Option("path", GetUrl("Pivot", "Demo"))
-                    .Selected(IsCurrentUrl("Pivot", "Demo"));
+                    .Text("Data Grid")
+                    .Option("path", GetUrl("DataGrid", "Demo"))
+                    .Selected(IsCurrentUrl("DataGrid", "Demo"));
+                    items.Add()
+                    .Text("Pivot Grid")
+                    .Option("path", GetUrl("PivotGrid", "Demo"))
+                    .Selected(IsCurrentUrl("PivotGrid", "Demo"));
                     items.Add()
                     .Text("Chart")
                     .Option("path", GetUrl("Chart", "Demo"))
