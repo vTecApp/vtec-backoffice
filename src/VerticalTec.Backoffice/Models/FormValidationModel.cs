@@ -48,31 +48,38 @@ namespace VerticalTec.Backoffice.Models
     public class FormValidationModel
     {
         [Required(ErrorMessage = "Email is required")]
+        [Display(Name = "Email")]
         [RegularExpression(@"^[\d\w._-]+@[\d\w._-]+\.[\w]+$", ErrorMessage = "Email is invalid")]
         [Remote("CheckEmailAddress", "RemoteValidation", ErrorMessage = "Email is already registered", HttpMethod = "POST")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Name is required")]
+        [Display(Name = "Name")]
         [RegularExpression(@"^[^0-9]+$", ErrorMessage = "Do not use digits in the Name.")]
         [StringLength(int.MaxValue, MinimumLength = 2, ErrorMessage = "Name must have at least 2 symbols")]
         public string Name { get; set; }
 
         [Required(ErrorMessage = "Password is required")]
+        [Display(Name = "Password")]
         public string Password { get; set; }
 
         [Required(ErrorMessage = "Confirm Password is required")]
+        [Display(Name = "Confirm Password")]
         [Compare("Password", ErrorMessage = "'Password' and 'Confirm Password' do not match.")]
         public string ConfirmPassword { get; set; }
 
+        [Display(Name = "Phone")]
         [RegularExpression(@"^[02-9]\d{9}$", ErrorMessage = "The phone must have a correct USA phone format")]
         public string Phone { get; set; }
 
         public string Extension { get; set; }
 
         [Required(ErrorMessage = "Country is required")]
+        [Display(Name = "Country")]
         public string Country { get; set; }
 
         [Required(ErrorMessage = "Address is required")]
+        [Display(Name = "Address")]
         public string Address { get; set; }
 
         public string Description { get; set; }
@@ -81,6 +88,7 @@ namespace VerticalTec.Backoffice.Models
 
         public string Drink { get; set; }
 
+        [Display(Name = "City")]
         [Required(ErrorMessage = "City is required")]
         [RegularExpression("^[^0-9]+$", ErrorMessage = "Do not use digits in the City name.")]
         [StringLength(int.MaxValue, MinimumLength = 2, ErrorMessage = "City must have at least 2 symbols")]

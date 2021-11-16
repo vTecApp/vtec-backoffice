@@ -53,7 +53,7 @@
                         groupItems.AddSimpleFor(m => m.Phone)
                             .HelpText("Enter the phone number in USA phone format")
                             .Editor(e => e.TextBox()
-                                .Mask("+1 (X00) 000-0000")
+                                .Mask("+66 (X0) 000-0000")
                                 .MaskRules(new { X = new JS("/[02-9]/") })
                                 .MaskInvalidMessage("The phone must have a correct USA phone format")
                             );

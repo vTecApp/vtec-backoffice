@@ -11,7 +11,7 @@ namespace VerticalTec.Backoffice.Controllers
 
         [HttpGet("GetDataGrid")]
         public object GetDataGrid(DataSourceLoadOptions loadOptions) {
-            return DataSourceLoader.Load(SampleData.Orders, loadOptions);
+            return DataSourceLoader.Load(SampleData.SampleOrders, loadOptions);
         }
 
         [HttpGet("GetPivot")]

@@ -7,12 +7,13 @@
     .DataSource(d => d.Mvc().Controller("SampleData").LoadAction("GetDataGrid").Key("OrderId"))
     .Columns(columns => {
         columns.AddFor(m => m.OrderId);
-        columns.AddFor(m => m.OrderDate).Format("dd/MMMM/yyyy");
-        columns.AddFor(m => m.CustomerName);
-        columns.AddFor(m => m.ShipCountry);
-        columns.AddFor(m => m.ShipCity);
+        columns.AddFor(m => m.Date).Format("dd/MMMM/yyyy");
+        columns.AddFor(m => m.Region);
+        columns.AddFor(m => m.Country);
+        columns.AddFor(m => m.City);
+        columns.AddFor(m => m.Amount).Format("#,#0.00");
     })
-    .Paging(p => p.PageSize(10))
+    .Paging(p => p.PageSize(20))
     .FilterRow(f => f.Visible(true))
     .HeaderFilter(f => f.Visible(true))
     .GroupPanel(p => p.Visible(true))
