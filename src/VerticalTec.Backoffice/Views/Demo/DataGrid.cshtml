@@ -1,13 +1,12 @@
-﻿@using VerticalTec_Backoffice.Models
-@using Microsoft.AspNetCore.Mvc.Localization
+﻿@using Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer Localizer
 
 <h1>@Localizer["Data Grid"]</h1>
 @(Html.DevExtreme().DataGrid<SampleOrder>()
     .ShowBorders(true)
-    .DataSource(d => d.Mvc().Controller("SampleData").LoadAction("Get").Key("OrderID"))
+    .DataSource(d => d.Mvc().Controller("SampleData").LoadAction("GetDataGrid").Key("OrderId"))
     .Columns(columns => {
-        columns.AddFor(m => m.OrderID);
+        columns.AddFor(m => m.OrderId);
         columns.AddFor(m => m.OrderDate).Format("dd/MMMM/yyyy");
         columns.AddFor(m => m.CustomerName);
         columns.AddFor(m => m.ShipCountry);

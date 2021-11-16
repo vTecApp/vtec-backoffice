@@ -1,31 +1,77 @@
 ﻿@using Microsoft.AspNetCore.Mvc.Localization
+
 @inject IViewLocalizer Localizer
 
 <h1>@Localizer["Form"]</h1>
-@(Html.DevExtreme().Form()
-    .ColCount(2)
-    .LabelLocation(FormLabelLocation.Left)
-    .Items(item =>
+@using (Html.BeginForm())
+{
+    using (Html.DevExtreme().ValidationGroup())
     {
-        item.AddGroup()
-        .ColCount(2)
-        .Items(item =>
-        {
-            item.AddSimple().Label(l => l.Text(Localizer["SelectBox"].Value))
-                .Editor(e => e.SelectBox()
-                .Value(new JS("null"))
-                    .DataSource(new[] {
-                    "Item1",
-                    "Item2",
-                    "Item3"
-                    }))
-                .ValidationRules(r => r.AddRequired().Message(Localizer["Required Field"].Value));
-                item.AddSimple().Label(l => l.Text(Localizer["TextBox"].Value)).Editor(e => e.TextBox());
-                item.AddSimple().Label(l => l.Text(Localizer["DateBox"].Value)).Editor(e => e.DateBox());
-        });
-        item.AddButton();
-    }).OnContentReady(@<text>
-        function(e) {
-                e.component.validate();
-            }
-    </text>))
+        @Html.AntiForgeryToken()
+
+        @(Html.DevExtreme().Form<FormValidationModel>()
+            .ShowValidationSummary(true)
+            .Items(items => {
+
+                items.AddGroup()
+                    .Caption(Localizer["Credentials"].Value)
+                    .Items(groupItems => {
+                        groupItems.AddSimpleFor(m => m.Email);
+
+                        groupItems.AddSimpleFor(m => m.Password)
+                            .Editor(e => e.TextBox().Mode(TextBoxMode.Password));
+
+                        groupItems.AddSimpleFor(m => m.ConfirmPassword)
+                            .Editor(e => e.TextBox().Mode(TextBoxMode.Password));
+                    });
+
+                items.AddGroup()
+                    .Caption(Localizer["Personal Data"].Value)
+                    .Items(groupItems => {
+                        groupItems.AddSimpleFor(m => m.Name);
+                        groupItems.AddSimpleFor(m => m.Date);
+                    });
+
+                items.AddGroup()
+                    .Caption(Localizer["Billing address"].Value)
+                    .Items(groupItems => {
+                        groupItems.AddSimpleFor(m => m.Country)
+                            .Editor(e => e
+                                .SelectBox()
+                                .DataSource(d => d.Mvc().Controller("GeoNames").LoadAction("Countries"))
+                            );
+
+                        groupItems.AddSimpleFor(m => m.City)
+                            .Editor(e => e
+                                .Autocomplete()
+                                .MinSearchLength(2)
+                                .DataSource(d => d.Mvc().Controller("GeoNames").LoadAction("Cities"))
+                            );
+
+                        groupItems.AddSimpleFor(m => m.Address);
+
+                        groupItems.AddSimpleFor(m => m.Phone)
+                            .HelpText("Enter the phone number in USA phone format")
+                            .Editor(e => e.TextBox()
+                                .Mask("+1 (X00) 000-0000")
+                                .MaskRules(new { X = new JS("/[02-9]/") })
+                                .MaskInvalidMessage("The phone must have a correct USA phone format")
+                            );
+
+                        groupItems.AddSimpleFor(m => m.Accepted)
+                            .Label(l => l.Visible(false))
+                            .Editor(editor => editor.CheckBox().Text("I agree to the Terms and Conditions"));
+                    });
+
+                items.AddButton()
+                    .HorizontalAlignment(HorizontalAlignment.Left)
+                    .ButtonOptions(b => b.Text("Register")
+                        .Type(ButtonType.Success)
+                        .UseSubmitBehavior(true)
+                );
+
+            })
+            .FormData(Model)
+        )
+    }
+}
