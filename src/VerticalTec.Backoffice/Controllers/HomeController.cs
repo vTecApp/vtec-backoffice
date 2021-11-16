@@ -25,12 +25,6 @@ namespace VerticalTec_Backoffice.Controllers
             return LocalRedirect(returnUrl);
         }
 
-        public IActionResult SetTheme(string themeName)
-        {
-            Response.Cookies.Append("ThemeName", themeName);
-            return Redirect("/");
-        }
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

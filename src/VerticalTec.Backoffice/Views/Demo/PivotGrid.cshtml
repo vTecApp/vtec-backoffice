@@ -1,4 +1,6 @@
-﻿<div id="pivotgrid-demo">
+﻿@inject Localization LocalizeService
+
+<div id="pivotgrid-demo">
     @(Html.DevExtreme().Chart()
         .ID("pivotgrid-chart")
         .CommonSeriesSettings(s => s.Type(SeriesType.Bar))
@@ -29,6 +31,7 @@
                     .Area(PivotGridArea.Row);
 
                 fields.AddFor(m => m.Date)
+                    .Format(LocalizeService.DateFormat)
                     .Area(PivotGridArea.Column);
 
                 fields.Add()
@@ -38,7 +41,7 @@
 
                 fields.AddFor(m => m.Amount)
                     .SummaryType(SummaryType.Sum)
-                    .Format(Format.Currency)
+                    .Format(LocalizeService.CurrencyFormat)
                     .Area(PivotGridArea.Data);
             })
         )

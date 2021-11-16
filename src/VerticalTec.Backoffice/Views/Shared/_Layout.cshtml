@@ -15,18 +15,18 @@
     @functions {
         string GetCurrentTheme()
         {
-            var themeName = Context.Request.Cookies["ThemeName"];
+            var themeName = Context.Request.Cookies["CurrentTheme"];
             if (string.IsNullOrEmpty(themeName))
-                themeName = "vendor.css";
+                themeName = "light";
             return themeName;
         }
     }
-    <link rel="stylesheet" href="~/css/@GetCurrentTheme()" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/@(GetCurrentTheme()).css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/Site.css" />
     <script src="~/js/vendor.js" asp-append-version="true"></script>
 </head>
 
-<body>
+<body class="dx-viewport">
     <div id="app-side-nav-outer-toolbar">
         <div class="layout-header">
             @{
@@ -58,8 +58,9 @@
                             .Width(140)
                             .Value(GetCurrentTheme())
                             .DataSource(new[] {
-                                new { ThemeName="vendor.css", DisplayName="Theme1" },
-                                new { ThemeName ="vendor2.css", DisplayName="Theme2" },
+                                new { ThemeName="light", DisplayName="Light" },
+                                new { ThemeName ="light-green", DisplayName="Light Green" },
+                                new { ThemeName ="dark", DisplayName="Dark" },
                             })
                             .OnValueChanged("VerticalTec_Backoffice.selectBoxThemeNameChanged")
                             .ValueExpr("ThemeName")
@@ -93,7 +94,7 @@
 
     @using (Html.DevExtreme().NamedTemplate("navigation-menu"))
     {
-        <div class="menu-container">
+        <div class="menu-container dx-swatch-@GetCurrentTheme()-additional">
         @functions {
             string GetUrl(string action, string controller = "") => Url.Action(action, controller);
             string GetCurrentUrl() => Url.Action(ViewContext.RouteData.Values["action"].ToString());
@@ -167,7 +168,7 @@
                     openedStateMode: isLarge ? "shrink" : "overlap",
                     revealMode: isXSmall ? "slide" : "expand",
                     minSize: 0,//isXSmall ? 0 : 60,
-                    //shading: !isLarge,
+                    shading: !isLarge,
                 });
             }
 
@@ -222,8 +223,8 @@
             }
 
             function selectBoxThemeNameChanged(args) {
-                var url = '@Url.Action("SetTheme", "Home")';
-                window.location.href = url + '?themeName=' + args.value;
+                document.cookie = "CurrentTheme=" + args.value + ";path=/";
+                window.location.reload();
             }
 
             return {

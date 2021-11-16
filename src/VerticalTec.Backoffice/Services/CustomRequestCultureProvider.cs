@@ -15,8 +15,8 @@ namespace VerticalTec.Backoffice.Services
             var localeService = httpContext.RequestServices.GetService<Localization>();
             var requestCulture = httpContext.Request.Cookies[CookieRequestCultureProvider.DefaultCookieName];
 
-            var culture = requestCulture.Split("|")[0].Split("=").Last();
-            var uiCulture = requestCulture.Split("|")[1].Split("=").Last();
+            var culture = requestCulture?.Split("|")[0].Split("=").Last() ?? "en-US";
+            var uiCulture = requestCulture?.Split("|")[1].Split("=").Last() ?? "en-US";
 
             if (culture == "id")
             {
