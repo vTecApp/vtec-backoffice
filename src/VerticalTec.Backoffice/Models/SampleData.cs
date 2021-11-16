@@ -35,7 +35,7 @@ namespace VerticalTec.Backoffice.Models {
                 Region = "North America",
                 Country = "United States",
                 City = "New York",
-                Amount = 1740,
+                Amount = 174014,
                 Date = DateTime.Parse("2013/01/06")
             },
             new SampleOrder {

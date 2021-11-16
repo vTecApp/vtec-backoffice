@@ -1,3 +1,5 @@
+@inject Localization Locale
+
 <!DOCTYPE html>
 
 <html>
@@ -43,30 +45,27 @@
                         .CssClass("header-title");
                     items.Add()
                         .Widget(w => w.SelectBox()
-                        .Width(140)
-                        .Value(requestCulture.RequestCulture.UICulture.Name)
-                        .DataSource(new[] {
-                            new { culture = "th", text = "TH" },
-                            new { culture= "en-US", text = "EN" },
-                        })
-                        .OnValueChanged("VerticalTec_Backoffice.selectBoxLanguageChanged")
-                        .ValueExpr("culture")
-                        .DisplayExpr("text"))
-                        .LocateInMenu(ToolbarItemLocateInMenuMode.Auto)
-                        .Location(ToolbarItemLocation.After);
+                            .Width(140)
+                            .Value(requestCulture.RequestCulture.UICulture.Name)
+                            .DataSource(Locale.Languages)
+                            .OnValueChanged("VerticalTec_Backoffice.selectBoxLanguageChanged")
+                            .ValueExpr("LangCode")
+                            .DisplayExpr("LangName"))
+                            .LocateInMenu(ToolbarItemLocateInMenuMode.Auto)
+                            .Location(ToolbarItemLocation.After);
                     items.Add()
                         .Widget(w => w.SelectBox()
-                        .Width(140)
-                        .Value(GetCurrentTheme())
-                        .DataSource(new[] {
-                            new { ThemeName="vendor.css", DisplayName="Theme1" },
-                            new { ThemeName ="vendor2.css", DisplayName="Theme2" },
-                        })
-                        .OnValueChanged("VerticalTec_Backoffice.selectBoxThemeNameChanged")
-                        .ValueExpr("ThemeName")
-                        .DisplayExpr("DisplayName"))
-                        .LocateInMenu(ToolbarItemLocateInMenuMode.Auto)
-                        .Location(ToolbarItemLocation.After);
+                            .Width(140)
+                            .Value(GetCurrentTheme())
+                            .DataSource(new[] {
+                                new { ThemeName="vendor.css", DisplayName="Theme1" },
+                                new { ThemeName ="vendor2.css", DisplayName="Theme2" },
+                            })
+                            .OnValueChanged("VerticalTec_Backoffice.selectBoxThemeNameChanged")
+                            .ValueExpr("ThemeName")
+                            .DisplayExpr("DisplayName"))
+                            .LocateInMenu(ToolbarItemLocateInMenuMode.Auto)
+                            .Location(ToolbarItemLocation.After);
                     }))
         </div>
         <div class="layout-body layout-body-hidden">

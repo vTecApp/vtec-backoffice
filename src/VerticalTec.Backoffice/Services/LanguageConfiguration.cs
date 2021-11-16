@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using System.Linq;
 
 namespace VerticalTec.Backoffice.Services
 {
@@ -9,7 +10,8 @@ namespace VerticalTec.Backoffice.Services
         {
             services.Configure<RequestLocalizationOptions>(options =>
             {
-                var supportedCultures = new[] { "en-US", "th" };
+                var localization = services.BuildServiceProvider().GetService<Localization>();
+                var supportedCultures = localization.Languages.Select(l => l.LangCode).ToArray();
                 options.SetDefaultCulture(supportedCultures[0])
                     .AddSupportedCultures(supportedCultures)
                     .AddSupportedUICultures(supportedCultures);

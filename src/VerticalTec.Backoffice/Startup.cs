@@ -30,7 +30,12 @@ namespace VerticalTec.Backoffice
                 });
 
             services.AddLocalization(options => options.ResourcesPath = "Resources");
+            services.AddScoped<Localization>();
             services.ConfigSupportedLanguage();
+            services.AddRequestLocalization(options =>
+            {
+                options.AddInitialRequestCultureProvider(new CustomRequestCultureProvider());
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
