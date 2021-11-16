@@ -10,8 +10,16 @@
 
     <title>Backoffice</title>
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-
-    <link rel="stylesheet" href="~/css/vendor.css" asp-append-version="true" />
+    @functions{
+        string GetCurrentTheme()
+        {
+            var themeName = Context.Request.Cookies["ThemeName"];
+            if (string.IsNullOrEmpty(themeName))
+                themeName = "vendor.css";
+            return themeName;
+        }
+    }
+    <link rel="stylesheet" href="~/css/@GetCurrentTheme()" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/Site.css" />
     <script src="~/js/vendor.js" asp-append-version="true"></script>
 </head>
@@ -22,14 +30,11 @@
             @{
                 var requestCulture = Context.Features.Get<Microsoft.AspNetCore.Localization.IRequestCultureFeature>();
             }
-            @(Html.DevExtreme().Toolbar()
-            .Items(items => {
-            items.Add()
-            .Widget(w => w
-            .Button()
-            .Icon("menu")
-            .OnClick("VerticalTec_Backoffice.onMenuButtonClick")
-            )
+            @(Html.DevExtreme().Toolbar().Items(items => {
+                items.Add()
+                .Widget(w => w
+                .Button().Icon("menu")
+                .OnClick("VerticalTec_Backoffice.onMenuButtonClick"))
             .Location(ToolbarItemLocation.Before)
             .CssClass("menu-button");
             items.Add()
@@ -49,6 +54,19 @@
             .DisplayExpr("text"))
             .LocateInMenu(ToolbarItemLocateInMenuMode.Auto)
             .Location(ToolbarItemLocation.After);
+            items.Add()
+            .Widget(w => w.SelectBox()
+            .Width(140)
+            .Value(GetCurrentTheme())
+            .DataSource(new[] {
+            new { ThemeName="vendor.css", DisplayName="Theme1" },
+            new { ThemeName ="vendor2.css", DisplayName="Theme2" },
+            })
+            .OnValueChanged("VerticalTec_Backoffice.selectBoxThemeNameChanged")
+            .ValueExpr("ThemeName")
+            .DisplayExpr("DisplayName"))
+            .LocateInMenu(ToolbarItemLocateInMenuMode.Auto)
+            .Location(ToolbarItemLocation.After);
             })
             )
         </div>
@@ -59,7 +77,7 @@
             .Opened(new JS("VerticalTec_Backoffice.restoreDrawerOpened()"))
             .Content(@<text>
                     <div id="layout-drawer-scrollview" class="with-footer">
-                        <div class="content pl-lg-5 pl-lg-5">
+                        <div class="content pl-lg-5 pr-lg-5">
                             @RenderBody()
                         </div>
                         <div class="content-block">
@@ -155,7 +173,7 @@
                     openedStateMode: isLarge ? "shrink" : "overlap",
                     revealMode: isXSmall ? "slide" : "expand",
                     minSize: 0,//isXSmall ? 0 : 60,
-                    shading: !isLarge,
+                    //shading: !isLarge,
                 });
             }
 
@@ -209,12 +227,18 @@
                 window.location.href = url + '?culture=' + args.value + '&returnUrl=' + returnUrl;
             }
 
+            function selectBoxThemeNameChanged(args) {
+                var url = '@Url.Action("SetTheme", "Home")';
+                window.location.href = url + '?themeName=' + args.value;
+            }
+
             return {
                 init: init,
                 restoreDrawerOpened: restoreDrawerOpened,
                 onMenuButtonClick: onMenuButtonClick,
                 onTreeViewItemClick: onTreeViewItemClick,
-                selectBoxLanguageChanged: selectBoxLanguageChanged
+                selectBoxLanguageChanged: selectBoxLanguageChanged,
+                selectBoxThemeNameChanged: selectBoxThemeNameChanged
             };
         })();
 

@@ -141,6 +141,9 @@
   <data name="Email" xml:space="preserve">
     <value>อีเมล์</value>
   </data>
+  <data name="Email is invalid" xml:space="preserve">
+    <value>อีเมล์ไม่ถูกต้อง</value>
+  </data>
   <data name="Email is required" xml:space="preserve">
     <value>กรุณากรอกอีเมล์</value>
   </data>
