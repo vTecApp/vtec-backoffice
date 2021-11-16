@@ -19,45 +19,45 @@
 <body>
     <div id="app-side-nav-outer-toolbar">
         <div class="layout-header">
-            @{ 
+            @{
                 var requestCulture = Context.Features.Get<Microsoft.AspNetCore.Localization.IRequestCultureFeature>();
             }
             @(Html.DevExtreme().Toolbar()
-                .Items(items => {
-                    items.Add()
-                        .Widget(w => w
-                            .Button()
-                            .Icon("menu")
-                            .OnClick("VerticalTec_Backoffice.onMenuButtonClick")
-                        )
-                        .Location(ToolbarItemLocation.Before)
-                        .CssClass("menu-button");
-                    items.Add()
-                        .Html("<div>Backoffice</div>")
-                        .Location(ToolbarItemLocation.Before)
-                        .CssClass("header-title");
-                    items.Add()
-                        .Widget(w => w.SelectBox()
-                        .Width(140)
-                        .Value(requestCulture.RequestCulture.UICulture.Name)
-                        .DataSource(new[] {
-                            new { culture = "th", text = "TH" },
-                            new { culture= "en-US", text = "EN" },
-                        })
-                        .OnValueChanged("VerticalTec_Backoffice.selectBoxLanguageChanged")
-                        .ValueExpr("culture")
-                        .DisplayExpr("text"))
-                        .LocateInMenu(ToolbarItemLocateInMenuMode.Auto)
-                        .Location(ToolbarItemLocation.After);
-                })
+            .Items(items => {
+            items.Add()
+            .Widget(w => w
+            .Button()
+            .Icon("menu")
+            .OnClick("VerticalTec_Backoffice.onMenuButtonClick")
+            )
+            .Location(ToolbarItemLocation.Before)
+            .CssClass("menu-button");
+            items.Add()
+            .Html("<div>Backoffice</div>")
+            .Location(ToolbarItemLocation.Before)
+            .CssClass("header-title");
+            items.Add()
+            .Widget(w => w.SelectBox()
+            .Width(140)
+            .Value(requestCulture.RequestCulture.UICulture.Name)
+            .DataSource(new[] {
+            new { culture = "th", text = "TH" },
+            new { culture= "en-US", text = "EN" },
+            })
+            .OnValueChanged("VerticalTec_Backoffice.selectBoxLanguageChanged")
+            .ValueExpr("culture")
+            .DisplayExpr("text"))
+            .LocateInMenu(ToolbarItemLocateInMenuMode.Auto)
+            .Location(ToolbarItemLocation.After);
+            })
             )
         </div>
         <div class="layout-body layout-body-hidden">
             @(Html.DevExtreme().Drawer()
-                .ID("layout-drawer")
-                .Position(DrawerPosition.Left)
-                .Opened(new JS("VerticalTec_Backoffice.restoreDrawerOpened()"))
-                .Content(@<text>
+            .ID("layout-drawer")
+            .Position(DrawerPosition.Left)
+            .Opened(new JS("VerticalTec_Backoffice.restoreDrawerOpened()"))
+            .Content(@<text>
                     <div id="layout-drawer-scrollview" class="with-footer">
                         <div class="content pl-lg-5 pl-lg-5">
                             @RenderBody()
@@ -65,13 +65,12 @@
                         <div class="content-block">
                             <div class="content-footer">
                                 <div id="footer">
-
                                 </div>
                             </div>
                         </div>
                     </div>
                 </text>)
-                .Template(new TemplateName("navigation-menu"))
+            .Template(new TemplateName("navigation-menu"))
             )
         </div>
     </div>
@@ -80,39 +79,39 @@
     {
         <div class="menu-container">
 
-            @functions{
-                string GetUrl(string action, string controller = "") => Url.Action(action, controller);
-                string GetCurrentUrl() => Url.Action(ViewContext.RouteData.Values["action"].ToString());
-                bool IsCurrentUrl(string action, string controller = "") => GetUrl(action, controller) == GetCurrentUrl();
-            }
+            @functions {
+            string GetUrl(string action, string controller = "") => Url.Action(action, controller);
+            string GetCurrentUrl() => Url.Action(ViewContext.RouteData.Values["action"].ToString());
+            bool IsCurrentUrl(string action, string controller = "") => GetUrl(action, controller) == GetCurrentUrl();
+        }
 
-            @(Html.DevExtreme().TreeView()
-                .Items(items =>
-                {
-                    items.Add()
-                    .Text("Form input")
-                    .Option("path", GetUrl("FormInput", "Demo"))
-                    .Selected(IsCurrentUrl("FormInput", "Demo")); 
-                    items.Add()
-                    .Text("Data Grid")
-                    .Option("path", GetUrl("DataGrid", "Demo"))
-                    .Selected(IsCurrentUrl("DataGrid", "Demo"));
-                    items.Add()
-                    .Text("Pivot Grid")
-                    .Option("path", GetUrl("PivotGrid", "Demo"))
-                    .Selected(IsCurrentUrl("PivotGrid", "Demo"));
-                    items.Add()
-                    .Text("Chart")
-                    .Option("path", GetUrl("Chart", "Demo"))
-                    .Selected(IsCurrentUrl("Chart", "Demo"));
-                })
-                .ExpandEvent(TreeViewExpandEvent.Click)
-                .SelectionMode(NavSelectionMode.Single)
-                .Width(250)
-                .OnItemClick("VerticalTec_Backoffice.onTreeViewItemClick")
-            )
+        @(Html.DevExtreme().TreeView()
+        .Items(items =>
+        {
+        items.Add()
+        .Text("Form input")
+        .Option("path", GetUrl("FormInput", "Demo"))
+        .Selected(IsCurrentUrl("FormInput", "Demo"));
+        items.Add()
+        .Text("Data Grid")
+        .Option("path", GetUrl("DataGrid", "Demo"))
+        .Selected(IsCurrentUrl("DataGrid", "Demo"));
+        items.Add()
+        .Text("Pivot Grid")
+        .Option("path", GetUrl("PivotGrid", "Demo"))
+        .Selected(IsCurrentUrl("PivotGrid", "Demo"));
+        items.Add()
+        .Text("Chart")
+        .Option("path", GetUrl("Chart", "Demo"))
+        .Selected(IsCurrentUrl("Chart", "Demo"));
+        })
+        .ExpandEvent(TreeViewExpandEvent.Click)
+        .SelectionMode(NavSelectionMode.Single)
+        .Width(250)
+        .OnItemClick("VerticalTec_Backoffice.onTreeViewItemClick")
+        )
 
-        </div>
+    </div>
     }
 
     <script>
