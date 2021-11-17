@@ -1,6 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer Localizer
-@inject Localization LocalizeService
+@inject LocalizationService LocaleService
 
 <h1>@Localizer["Data Grid"]</h1>
 @(Html.DevExtreme().DataGrid<SampleOrder>()
@@ -8,11 +8,11 @@
     .DataSource(d => d.Mvc().Controller("SampleData").LoadAction("GetDataGrid").Key("OrderId"))
     .Columns(columns => {
         columns.AddFor(m => m.OrderId);
-        columns.AddFor(m => m.Date).Format(LocalizeService.DateFormat);
+        columns.AddFor(m => m.Date).Format(LocaleService.Locale.Format.DateFormat);
         columns.AddFor(m => m.Region);
         columns.AddFor(m => m.Country);
         columns.AddFor(m => m.City);
-        columns.AddFor(m => m.Amount).Format(LocalizeService.CurrencyFormat);
+        columns.AddFor(m => m.Amount).Format(LocaleService.Locale.Format.CurrencyFormat);
     })
     .Paging(p => p.PageSize(20))
     .FilterRow(f => f.Visible(true))

@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -12,22 +10,13 @@ namespace VerticalTec.Backoffice.Services
     {
         public override Task<ProviderCultureResult> DetermineProviderCultureResult(HttpContext httpContext)
         {
-            var localeService = httpContext.RequestServices.GetService<Localization>();
+            var localeService = httpContext.RequestServices.GetService<LocalizationService>();
             var requestCulture = httpContext.Request.Cookies[CookieRequestCultureProvider.DefaultCookieName];
 
             var culture = requestCulture?.Split("|")[0].Split("=").Last() ?? "en-US";
             var uiCulture = requestCulture?.Split("|")[1].Split("=").Last() ?? "en-US";
 
-            if (culture == "id")
-            {
-                localeService.QtyFormat = "#,##0";
-                localeService.CurrencyFormat = "#,##0";
-            }
-            else
-            {
-                localeService.QtyFormat = "#,##0";
-                localeService.CurrencyFormat = "#,##0.00";
-            }
+            localeService.SetSelectedLocale(uiCulture);
 
             var providerResultCulture = new ProviderCultureResult(culture, uiCulture);
             return Task.FromResult(providerResultCulture);

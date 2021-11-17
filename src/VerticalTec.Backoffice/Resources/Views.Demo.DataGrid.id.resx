@@ -117,28 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Confirm Password" xml:space="preserve">
-    <value>ยืนยันรหัสผ่าน</value>
-  </data>
-  <data name="Credentials" xml:space="preserve">
-    <value>ข้อมูลเข้าระบบ</value>
-  </data>
-  <data name="Email" xml:space="preserve">
-    <value>อีเมล์</value>
-  </data>
-  <data name="Form" xml:space="preserve">
-    <value>ฟอร์ม</value>
-  </data>
-  <data name="Password" xml:space="preserve">
-    <value>รหัสผ่าน</value>
-  </data>
-  <data name="Personal Data" xml:space="preserve">
-    <value>ข้อมูลส่วนบุคคล</value>
-  </data>
-  <data name="Phone" xml:space="preserve">
-    <value>เบอร์โทร</value>
-  </data>
-  <data name="Required Field" xml:space="preserve">
-    <value>กรุณากรอกข้อมูล</value>
+  <data name="Data Grid" xml:space="preserve">
+    <value>Meja</value>
   </data>
 </root>

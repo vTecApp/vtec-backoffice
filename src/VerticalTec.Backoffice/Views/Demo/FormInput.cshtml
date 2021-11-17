@@ -10,11 +10,11 @@
         @Html.AntiForgeryToken()
 
         @(Html.DevExtreme().Form<FormValidationModel>()
+            .Width(500)
             .ShowValidationSummary(true)
             .Items(items => {
 
                 items.AddGroup()
-                    .Caption(Localizer["Credentials"].Value)
                     .Items(groupItems => {
                         groupItems.AddSimpleFor(m => m.Email);
 
@@ -26,45 +26,26 @@
                     });
 
                 items.AddGroup()
-                    .Caption(Localizer["Personal Data"].Value)
                     .Items(groupItems => {
-                        groupItems.AddSimpleFor(m => m.Name);
-                        groupItems.AddSimpleFor(m => m.Date);
-                    });
-
-                items.AddGroup()
-                    .Caption(Localizer["Billing address"].Value)
-                    .Items(groupItems => {
-                        groupItems.AddSimpleFor(m => m.Country)
-                            .Editor(e => e
-                                .SelectBox()
-                                .DataSource(d => d.Mvc().Controller("GeoNames").LoadAction("Countries"))
-                            );
-
-                        groupItems.AddSimpleFor(m => m.City)
-                            .Editor(e => e
-                                .Autocomplete()
-                                .MinSearchLength(2)
-                                .DataSource(d => d.Mvc().Controller("GeoNames").LoadAction("Cities"))
-                            );
-
-                        groupItems.AddSimpleFor(m => m.Address);
-
+                        groupItems.AddSimpleFor(m => m.Number)
+                            .Editor(e => e.NumberBox());
+                        groupItems.AddSimpleFor(m => m.Date)
+                            .Label(l => l.Text("Date"));
+                        groupItems.AddSimpleFor(m => m.Date)
+                            .Label(l => l.Text("Date Time"))
+                            .Editor(e => e.DateBox()
+                                .Type(DateBoxType.DateTime));
                         groupItems.AddSimpleFor(m => m.Phone)
-                            .HelpText("Enter the phone number in USA phone format")
+                            .HelpText("Phone number")
                             .Editor(e => e.TextBox()
                                 .Mask("+66 (X0) 000-0000")
                                 .MaskRules(new { X = new JS("/[02-9]/") })
                             );
-
-                        groupItems.AddSimpleFor(m => m.Accepted)
-                            .Label(l => l.Visible(false))
-                            .Editor(editor => editor.CheckBox().Text("I agree to the Terms and Conditions"));
                     });
 
                 items.AddButton()
                     .HorizontalAlignment(HorizontalAlignment.Left)
-                    .ButtonOptions(b => b.Text("Register")
+                    .ButtonOptions(b => b.Text("Sumit")
                         .Type(ButtonType.Success)
                         .UseSubmitBehavior(true)
                 );

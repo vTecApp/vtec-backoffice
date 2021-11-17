@@ -4,14 +4,6 @@
     <TargetFramework>net5.0</TargetFramework>
     </PropertyGroup>
   <ItemGroup>
-    <None Include="wwwroot\css\devextreme\fonts\Roboto-300.woff2" />
-    <None Include="wwwroot\css\devextreme\fonts\Roboto-400.woff2" />
-    <None Include="wwwroot\css\devextreme\fonts\Roboto-500.woff2" />
-    <None Include="wwwroot\css\devextreme\fonts\Roboto-700.woff2" />
-    <None Include="wwwroot\css\devextreme\icons\dxicons.woff2" />
-    <None Include="wwwroot\css\devextreme\icons\dxiconsmaterial.woff2" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="DevExtreme.AspNet.Data" Version="2.8.2" />
     <PackageReference Include="DevExtreme.AspNet.Core" Version="21.2.3" />
     <PackageReference Include="BuildBundlerMinifier" Version="2.9.406" />

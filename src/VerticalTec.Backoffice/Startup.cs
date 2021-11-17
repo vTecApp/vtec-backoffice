@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using VerticalTec.Backoffice.Models;
 using VerticalTec.Backoffice.Services;
 
 namespace VerticalTec.Backoffice
@@ -30,7 +31,6 @@ namespace VerticalTec.Backoffice
                 });
 
             services.AddLocalization(options => options.ResourcesPath = "Resources");
-            services.AddScoped<Localization>();
             services.ConfigSupportedLanguage();
             services.AddRequestLocalization(options =>
             {

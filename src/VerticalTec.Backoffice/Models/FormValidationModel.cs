@@ -107,5 +107,10 @@ namespace VerticalTec.Backoffice.Models
 
         [DevExtremeRequired(ErrorMessage = "You must agree to the Terms and Conditions")]
         public bool Accepted { get; set; }
+
+        [Display(Name = "Number")]
+        [Required(ErrorMessage = "Please input number")]
+        [RegularExpression("[0-9]", ErrorMessage = "Input only number")]
+        public decimal Number { get; set; }
     }
 }

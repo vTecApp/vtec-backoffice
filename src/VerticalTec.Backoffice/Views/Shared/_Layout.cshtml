@@ -1,4 +1,4 @@
-@inject Localization Locale
+@inject LocalizationService LocalizeService
 
 <!DOCTYPE html>
 
@@ -21,7 +21,7 @@
             return themeName;
         }
     }
-    <link rel="stylesheet" href="~/css/@(GetCurrentTheme()).css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/@(GetCurrentTheme()).min.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/Site.css" />
     <script src="~/js/vendor.js" asp-append-version="true"></script>
 </head>
@@ -31,6 +31,7 @@
         <div class="layout-header">
             @{
                 var requestCulture = Context.Features.Get<Microsoft.AspNetCore.Localization.IRequestCultureFeature>();
+                var uiCulture = requestCulture.RequestCulture.UICulture.Name;
             }
             @(Html.DevExtreme().Toolbar()
                 .Items(items => {
@@ -40,14 +41,15 @@
                             .OnClick("VerticalTec_Backoffice.onMenuButtonClick"))
                             .Location(ToolbarItemLocation.Before)
                             .CssClass("menu-button");
-                    items.Add().Html("<div>Backoffice</div>")
-                        .Location(ToolbarItemLocation.Before)
-                        .CssClass("header-title");
+                    items.Add()
+                        .Html("<div>Backoffice</div>")
+                            .Location(ToolbarItemLocation.Before)
+                            .CssClass("header-title");
                     items.Add()
                         .Widget(w => w.SelectBox()
                             .Width(140)
-                            .Value(requestCulture.RequestCulture.UICulture.Name)
-                            .DataSource(Locale.Languages)
+                            .Value(uiCulture)
+                            .DataSource(LocalizeService.Locales)
                             .OnValueChanged("VerticalTec_Backoffice.selectBoxLanguageChanged")
                             .ValueExpr("LangCode")
                             .DisplayExpr("LangName"))
@@ -76,7 +78,7 @@
             .Opened(new JS("VerticalTec_Backoffice.restoreDrawerOpened()"))
             .Content(@<text>
                     <div id="layout-drawer-scrollview" class="with-footer">
-                        <div class="content pl-lg-5 pr-lg-5">
+                        <div class="content ml-5 mr-5 pl-5 pr-5">
                             @RenderBody()
                         </div>
                         <div class="content-block">
@@ -167,6 +169,7 @@
                 getDrawer().option({
                     openedStateMode: isLarge ? "shrink" : "overlap",
                     revealMode: isXSmall ? "slide" : "expand",
+                    closeOnOutsideClick: isLarge ? false : true,
                     minSize: 0,//isXSmall ? 0 : 60,
                     shading: !isLarge,
                 });
@@ -183,7 +186,6 @@
                 });
 
                 updateDrawer();
-
                 $('.layout-body').removeClass('layout-body-hidden');
             }
 

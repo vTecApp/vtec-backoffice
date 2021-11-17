@@ -49,10 +49,6 @@ body, html {
     width: 250px;
 }
 
-.content{
-    margin: 20px;
-}
-
 .layout-body .content {
     flex-grow: 1;
     height: 100%;
