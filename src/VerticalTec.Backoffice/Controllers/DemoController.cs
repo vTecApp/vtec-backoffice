@@ -34,5 +34,10 @@ namespace VerticalTec.Backoffice.Controllers
         {
             return View();
         }
+
+        public IActionResult HTMLEditor()
+        {
+            return View();
+        }
     }
 }
