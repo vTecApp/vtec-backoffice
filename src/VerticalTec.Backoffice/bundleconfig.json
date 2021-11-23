@@ -30,6 +30,24 @@
     }
   },
   {
+    "outputFileName": "wwwroot/css/material.light-blue.css",
+    "inputFiles": [
+      "wwwroot/css/devextreme/dx.material.light-blue.css"
+    ],
+    "minify": {
+      "enabled": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/css/material.light-blue-compact.css",
+    "inputFiles": [
+      "wwwroot/css/devextreme/dx.material.light-blue-compact.css"
+    ],
+    "minify": {
+      "enabled": true
+    }
+  },
+  {
     "outputFileName": "wwwroot/js/vendor.js",
     "inputFiles": [
       "wwwroot/js/devextreme/jquery.js",
