@@ -1,5 +1,7 @@
-﻿@inject LocalizationService LocaleService
+﻿@inject IViewLocalizer Localizer
+@inject LocalizationService LocaleService
 
+<h1>@Localizer["Pivot Grid"]</h1>
 <div id="pivotgrid-demo">
     @(Html.DevExtreme().Chart()
         .ID("pivotgrid-chart")
