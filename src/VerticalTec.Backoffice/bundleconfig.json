@@ -51,7 +51,7 @@
     "outputFileName": "wwwroot/js/vendor.js",
     "inputFiles": [
       "wwwroot/js/devextreme/jquery.js",
-      "wwwroot/js/devextreme/bootstrap.js",
+      "wwwroot/js/bootstrap.js",
       "wwwroot/js/devextreme/dx.all.js",
       "wwwroot/js/devextreme/aspnet/dx.aspnet.mvc.js",
       "wwwroot/js/devextreme/aspnet/dx.aspnet.data.js"
