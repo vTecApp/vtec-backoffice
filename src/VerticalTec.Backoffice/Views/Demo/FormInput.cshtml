@@ -27,6 +27,15 @@
 
                 items.AddGroup()
                     .Items(groupItems => {
+                        groupItems.AddSimpleFor(m => m.RoleID)
+                            .Label(l => l.Text("Role"))
+                            .Editor(e => e.SelectBox()
+                                .DataSource(new JS("datasource_StaffRole"))
+                                .DisplayExpr("RoleName")
+                                .ValueExpr("RoleID")
+                                .SearchEnabled(true)
+                                .ShowClearButton(true)
+                            );
                         groupItems.AddSimpleFor(m => m.Number)
                             .Editor(e => e.NumberBox());
                         groupItems.AddSimpleFor(m => m.Date)
@@ -45,7 +54,7 @@
 
                 items.AddButton()
                     .HorizontalAlignment(HorizontalAlignment.Left)
-                    .ButtonOptions(b => b.Text("Sumit")
+                    .ButtonOptions(b => b.Text("Submit")
                         .Type(ButtonType.Success)
                         .UseSubmitBehavior(true)
                 );
@@ -55,3 +64,46 @@
         )
     }
 }
+
+<script>
+
+    var datasource_StaffRole = [
+            {
+                RoleID: 1,
+                RoleName: "System Admin"
+            }, 
+            {
+                RoleID: 2,
+                RoleName: "Admin"
+            }, 
+            {
+                RoleID: 3,
+                RoleName: "HQ User"
+            }, 
+            {
+                RoleID: 4,
+                RoleName: "Store Manager"
+            }, 
+            {
+                RoleID: 5,
+                RoleName: "Store Cashier"
+            }, 
+            {
+                RoleID: 6,
+                RoleName: "Operation Dept."
+            }, 
+            {
+                RoleID: 7,
+                RoleName: "Account Dept."
+            }, 
+            {
+                RoleID: 8,
+                RoleName: "Purchase Dept."
+            }, 
+            {
+                RoleID: 9,
+                RoleName: "Finance Dept."
+            }
+        ];
+
+</script>
