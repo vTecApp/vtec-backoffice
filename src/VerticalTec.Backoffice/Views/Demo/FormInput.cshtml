@@ -12,32 +12,49 @@
         @(Html.DevExtreme().Form<FormValidationModel>()
             .Width(500)
             .ShowValidationSummary(true)
+            .LabelLocation(FormLabelLocation.Left)
             .Items(items => {
 
                 items.AddGroup()
                     .Items(groupItems => {
-                        groupItems.AddSimpleFor(m => m.Email);
-
+                        groupItems.AddSimpleFor(m => m.Email)
+                            .Editor(e => e.TextBox()
+                                .StylingMode(EditorStylingMode.Outlined)
+                                .LabelMode(EditorLabelMode.Floating));
                         groupItems.AddSimpleFor(m => m.Password)
-                            .Editor(e => e.TextBox().Mode(TextBoxMode.Password));
-
+                            .Editor(e => e.TextBox()
+                                .Mode(TextBoxMode.Password)
+                                .StylingMode(EditorStylingMode.Outlined)
+                                .LabelMode(EditorLabelMode.Floating));
                         groupItems.AddSimpleFor(m => m.ConfirmPassword)
-                            .Editor(e => e.TextBox().Mode(TextBoxMode.Password));
+                            .Editor(e => e.TextBox()
+                                .Mode(TextBoxMode.Password)
+                                .StylingMode(EditorStylingMode.Outlined)
+                                .LabelMode(EditorLabelMode.Floating));
                     });
 
                 items.AddGroup()
                     .Items(groupItems => {
                         groupItems.AddSimpleFor(m => m.Number)
-                            .Editor(e => e.NumberBox());
+                            .Editor(e => e.NumberBox()
+                                .StylingMode(EditorStylingMode.Outlined)
+                                .LabelMode(EditorLabelMode.Floating));
                         groupItems.AddSimpleFor(m => m.Date)
-                            .Label(l => l.Text("Date"));
+                            .Label(l => l.Text("Date"))
+                            .Editor(e => e.DateBox()
+                                .StylingMode(EditorStylingMode.Outlined)
+                                .LabelMode(EditorLabelMode.Floating));
                         groupItems.AddSimpleFor(m => m.Date)
                             .Label(l => l.Text("Date Time"))
                             .Editor(e => e.DateBox()
-                                .Type(DateBoxType.DateTime));
+                                .Type(DateBoxType.DateTime)
+                                .StylingMode(EditorStylingMode.Outlined)
+                                .LabelMode(EditorLabelMode.Floating));
                         groupItems.AddSimpleFor(m => m.Phone)
                             .HelpText("Phone number")
                             .Editor(e => e.TextBox()
+                                .StylingMode(EditorStylingMode.Outlined)
+                                .LabelMode(EditorLabelMode.Floating)
                                 .Mask("+66 (X0) 000-0000")
                                 .MaskRules(new { X = new JS("/[02-9]/") })
                             );
