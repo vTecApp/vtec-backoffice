@@ -59,6 +59,10 @@ namespace VerticalTec.Backoffice.Models
         [StringLength(int.MaxValue, MinimumLength = 2, ErrorMessage = "Name must have at least 2 symbols")]
         public string Name { get; set; }
 
+        [Required(ErrorMessage = "Role is required")]
+        [Display(Name = "Role")]
+        public int RoleID { get; set; }
+
         [Required(ErrorMessage = "Password is required")]
         [Display(Name = "Password")]
         public string Password { get; set; }
