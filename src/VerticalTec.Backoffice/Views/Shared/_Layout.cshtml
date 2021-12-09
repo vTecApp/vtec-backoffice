@@ -124,6 +124,10 @@
                     .Text("HTML Editor")
                     .Option("path", GetUrl("HTMLEditor", "Demo"))
                     .Selected(IsCurrentUrl("HTMLEditor", "Demo"));
+                items.Add()
+                    .Text("Grid Example")
+                    .Option("path", GetUrl("GridExample", "Demo"))
+                    .Selected(IsCurrentUrl("GridExample", "Demo"));
              })
              .ExpandEvent(TreeViewExpandEvent.Click)
              .SelectionMode(NavSelectionMode.Single)

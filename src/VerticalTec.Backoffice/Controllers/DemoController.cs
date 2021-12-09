@@ -39,5 +39,10 @@ namespace VerticalTec.Backoffice.Controllers
         {
             return View();
         }
+
+        public IActionResult GridExample()
+        {
+            return View();
+        }
     }
 }
