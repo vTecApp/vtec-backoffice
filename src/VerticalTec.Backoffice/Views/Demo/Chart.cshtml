@@ -1,3 +1,170 @@
 ﻿@inject IViewLocalizer Localizer
 
-<H1>@Localizer["Address"]</H1>
+<H1>@Localizer["Chart"]</H1>
+<br />
+
+<div class="row mb-3">
+    <div class="col-md-12 themed-grid-col">
+        <div class="pb-3">
+            <div class="row">
+                <div class="col-md-3 themed-grid-col center" style="border: 0px solid #d4d4d4; border-width: 0 0 0 4px;">
+                    <label>Total Bill</label>
+                    <br />
+                    <span class="green lead">35,165</span>
+                </div>
+                <div class="col-md-3 themed-grid-col center" style="border: 0px solid #d4d4d4; border-width: 0 0 0 4px;">
+                    <label>Total Sales</label>
+                    <br />
+                    <span class="green lead">895,735.00</span>
+                </div>
+                <div class="col-md-3 themed-grid-col center" style="border: 0px solid #d4d4d4; border-width: 0 0 0 4px;">
+                    <label>Avg. Bill</label>
+                    <br />
+                    <span class="green lead">25.47</span>
+                </div>
+                <div class="col-md-3 themed-grid-col center" style="border: 0px solid #d4d4d4; border-width: 0 0 0 4px;">
+                    <label>Total Cups</label>
+                    <br />
+                    <span class="green lead">26,323</span>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <br />
+        <div class="row">
+            <div class="col-md-3 themed-grid-col">
+                @(Html.DevExtreme().PieChart()
+                    .ID("pie")
+                    .Type(PieChartType.Doughnut)
+                    .Palette(VizPalette.SoftPastel)
+                    .Title("Top Internet Languages")
+                    .Legend(l => l
+                        .HorizontalAlignment(HorizontalAlignment.Center)
+                        .VerticalAlignment(VerticalEdge.Bottom)
+                    )
+                    .Export(e => e.Enabled(true))
+                    .Series(s => s
+                        .Add()
+                        .SmallValuesGrouping(g => g
+                            .Mode(SmallValuesGroupingMode.TopN)
+                            .TopCount(3)
+                        )
+                        .ArgumentField("Language")
+                        .ValueField("Percent")
+                        .Label(l => l
+                            .Visible(true)
+                            .Format(DevExtreme.AspNet.Mvc.Format.FixedPoint)
+                            .CustomizeText(@<text>
+                                function (point) {
+                                    return point.argumentText + ": " + point.valueText + "%";
+                                }
+                            </text>)
+                            .Connector(c => c
+                                .Visible(true)
+                                .Width(1)
+                            )
+                        )
+                    )
+                    .DataSource(new[] {
+                        new { Language = "English", Percent = 55.5 },
+                        new { Language = "Chinese", Percent = 4.0 },
+                        new { Language = "Spanish", Percent = 4.3 },
+                        new { Language = "Japanese", Percent = 4.9 },
+                        new { Language = "Portuguese", Percent = 2.3 },
+                        new { Language = "German", Percent = 5.6 },
+                        new { Language = "French", Percent = 3.8 },
+                        new { Language = "Russian", Percent = 6.3 },
+                        new { Language = "Italian", Percent = 1.6 },
+                        new { Language = "Polish", Percent = 1.8 }
+                    })
+                )
+            </div>
+            <div class="col-md-9 themed-grid-col">
+                @(Html.DevExtreme().Chart()
+                    .ID("chart")
+                    .Palette(VizPalette.Soft)
+                    .CommonSeriesSettings(s => s
+                        .ArgumentField("age")
+                        .ValueField("number")
+                        .Type(SeriesType.Bar)
+                        .IgnoreEmptyPoints(true)
+                    )
+                    .Title(t => t
+                        .Text("Age Breakdown of Facebook Users in the U.S.")
+                        .Subtitle("as of January 2017")
+                    )
+                    .SeriesTemplate(t => t.NameField("age"))
+                    .DataSource(new[] {
+                        new { age = "13-17", number = 5900000 },
+                        new { age = "18-24", number = 38250000 },
+                        new { age = "25-34", number = 52820000 },
+                        new { age = "35-44", number = 38420000 },
+                        new { age = "45-54", number = 32340000 },
+                        new { age = "55-64", number = 14060000 },
+                        new { age = "65+", number = 20020000 }
+                    })
+                )
+            </div>
+        </div>
+        <hr />
+        <br />
+        <div class="row">
+            <div class="pb-3">
+                <div id="chart-demo">
+                    @(Html.DevExtreme().Chart()
+                        .ID("area-chart")
+                        .Palette(VizPalette.HarmonyLight)
+                        .CommonSeriesSettings(s => s
+                        .ArgumentField("Country")
+                        .Type(SeriesType.Area)
+                    )
+                    .Series(s => {
+                        s.Add().ValueField("Y1564").Name("15-64 years");
+                        s.Add().ValueField("Y014").Name("0-14 years");
+                        s.Add().ValueField("Y65").Name("65 years and older");
+                    })
+                        .Margin(m => m.Bottom(20))
+                        .Title("POS Question (2021)")
+                        .ArgumentAxis(a => a.ValueMarginsEnabled(false))
+                        .Export(e => e.Enabled(true))
+                        .Legend(l => l
+                        .VerticalAlignment(VerticalEdge.Bottom)
+                        .HorizontalAlignment(HorizontalAlignment.Center)
+                    )
+                    .DataSource(new[] {
+                            new {  Country = "Thai",  Y014 = 2338,  Y1564 = 11709,  Y65 = 1717 },
+                            new {  Country = "Chinese",  Y014 = 3734,  Y1564 = 8825,  Y65 = 760 },
+                            new {  Country = "Asia",  Y014 = 605,  Y1564 = 2131,  Y65 = 548 },
+                            new {  Country = "US",  Y014 = 657,  Y1564 = 1770,  Y65 = 180 },
+                            new {  Country = "Europe",  Y014 = 452,  Y1564 = 1443,  Y65 = 171 },
+                            new {  Country = "ETC.",  Y014 = 244,  Y1564 = 961,  Y65 = 204 }
+                        })
+                    )
+
+                    @*<div class="options">
+                        <div class="caption">Options</div>
+                        <div class="option">
+                        <span>Series Type</span>
+                        @(Html.DevExtreme().SelectBox()
+                            .DataSource(new[] {
+                                SeriesType.Area,
+                                SeriesType.StackedArea,
+                                SeriesType.FullStackedArea
+                            })
+                            .Value(SeriesType.Area)
+                            .OnValueChanged(@<text>
+                                function(e) {
+                                    var chart = $("#area-chart").dxChart("instance");
+                                    chart.option("commonSeriesSettings.type", e.value);
+                                }
+                            </text>)
+                        )
+                        </div>
+                    </div>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
